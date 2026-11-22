@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PT CIPTA BUANA SEJAHTERA — Portal Rekrutmen & Screening HR</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon Profesional -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        corporate: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-corporate-600 selection:text-white">
+
+    <!-- Notifikasi Toast Melayang (Pengganti Alert) -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-3 pointer-events-none"></div>
+
+    <!-- Navigasi Utama (Sticky Header) -->
+    <header class="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-18 py-4">
+                <!-- Logo Perusahaan -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-corporate-800 to-corporate-600 flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-industry text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-base sm:text-lg tracking-tight text-slate-900">PT CIPTA BUANA <span class="text-corporate-600">SEJAHTERA</span></span>
+                        <p class="text-[11px] font-medium text-slate-500 -mt-1 tracking-wider uppercase">HR & Career Portal</p>
+                    </div>
+                </a>
+
+                <!-- Menu Desktop -->
+                <nav class="hidden md:flex items-center space-x-2 bg-slate-100/80 p-1.5 rounded-2xl border border-slate-200/60">
+                    <a href="#lowongan" data-nav="lowongan" class="nav-link px-5 py-2 rounded-xl text-sm font-semibold text-corporate-700 bg-white shadow-sm transition-all">
+                        <i class="fa-solid fa-magnifying-glass mr-1.5"></i> Lowongan Pekerjaan
+                    </a>
+                    <a href="#screening" data-nav="screening" class="nav-link px-5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all">
+                        <i class="fa-solid fa-user-check mr-1.5"></i> Screening Data
+                    </a>
+                    <a href="#kontak" data-nav="kontak" class="nav-link px-5 py-2 rounded-xl text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all">
+                        <i class="fa-solid fa-envelope mr-1.5"></i> Kontak Kami
+                    </a>
+                </nav>
+
+                <!-- Tombol Aksi Cepat Desktop -->
+                <div class="hidden md:flex items-center">
+                    <a href="#screening" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-corporate-600 hover:bg-corporate-700 text-white text-sm font-semibold shadow-sm hover:shadow transition-all">
+                        <span>Mulai Screening Data</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Tombol Hamburger Mobile -->
+                <button id="mobile-menu-btn" type="button" class="md:hidden p-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 focus:outline-none transition-colors" aria-label="Buka menu navigasi">
+                    <i id="mobile-menu-icon" class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dropdown Menu Mobile -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-5 space-y-2 shadow-lg">
+            <a href="#lowongan" data-nav="lowongan" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-semibold bg-corporate-50 text-corporate-700">
+                <i class="fa-solid fa-magnifying-glass w-6"></i> Lowongan Pekerjaan
+            </a>
+            <a href="#screening" data-nav="screening" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-50">
+                <i class="fa-solid fa-user-check w-6"></i> Screening Data
+            </a>
+            <a href="#kontak" data-nav="kontak" class="mobile-nav-link block px-4 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-50">
+                <i class="fa-solid fa-envelope w-6"></i> Kontak Kami
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Banner Profesional -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-corporate-900 to-slate-900 text-white py-16 sm:py-24">
+        <!-- Dekorasi Latar Abstrak -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-corporate-400 blur-3xl"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full bg-blue-300 blur-3xl"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl">
+            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-corporate-800/80 border border-corporate-600/50 text-corporate-200 text-xs font-semibold tracking-wide uppercase mb-6">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Rekrutmen Resmi PT CIPTA BUANA SEJAHTERA • 2026
+            </span>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight mb-6">
+                Tumbuh & Berkarya Bersama <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-300 to-cyan-200">PT Cipta Buana Sejahtera</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-300 leading-relaxed mb-8">
+                Bergabunglah dengan perusahaan manufaktur dan operasional industri terkemuka. Temukan posisi terbaik Anda, lakukan evaluasi kelayakan kandidat secara otomatis melalui sistem screening kami, dan terhubung langsung dengan tim HRD.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#lowongan" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-corporate-500 hover:bg-corporate-400 text-white font-semibold shadow-lg shadow-corporate-950/50 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-briefcase"></i> Lihat Lowongan
+                </a>
+                <a href="#screening" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 font-semibold backdrop-blur-sm transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-clipboard-check"></i> Mulai Screening Data
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- BAGIAN 1: LOWONGAN PEKERJAAN                                          -->
+    <!-- ===================================================================== -->
+    <section id="lowongan" class="py-16 sm:py-24 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header Section -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6">
+                <div>
+                    <span class="text-corporate-600 font-bold text-sm uppercase tracking-wider">Peluang Karier Industri</span>
+                    <h2 class="text-2xl sm:text-4xl font-bold text-slate-900 mt-1">Lowongan Pekerjaan Tersedia</h2>
+                    <p class="text-slate-600 mt-2 max-w-2xl">Pilih posisi yang sesuai dengan keahlian dan latar belakang Anda. Klik <strong>Lamar Posisi Ini</strong> untuk langsung mengisi formulir screening data.</p>
+                </div>
+
+                <!-- Statistik Singkat -->
+                <div class="flex items-center gap-4 bg-white px-5 py-3 rounded-2xl border border-slate-200 shadow-sm self-start md:self-auto">
+                    <div class="w-10 h-10 rounded-xl bg-corporate-50 text-corporate-600 flex items-center justify-center font-bold">
+                        <span id="job-count">3</span>
+                    </div>
+                    <div class="text-sm">
+                        <p class="font-semibold text-slate-900">Posisi Aktif</p>
+                        <p class="text-slate-500 text-xs">Penempatan Pabrik & Kantor</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bar Filter & Pencarian -->
+            <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Pencarian Kata Kunci -->
+                    <div class="lg:col-span-2 relative">
+                        <i class="fa-solid fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                        <input type="text" id="filter-search" placeholder="Cari posisi (Admin, QC, Operator) atau kualifikasi..." 
+                            class="w-full pl-11 pr-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-corporate-500 focus:bg-white transition-all">
+                    </div>
+
+                    <!-- Filter Kategori/Departemen -->
+                    <div>
+                        <select id="filter-category" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-corporate-500 focus:bg-white transition-all">
+                            <option value="all">Semua Departemen</option>
+                            <option value="Administrasi & Umum">Administrasi & Umum</option>
+                            <option value="Quality Assurance / QC">Quality Assurance / QC</option>
+                            <option value="Produksi & Operasional">Produksi & Operasional</option>
+                        </select>
+                    </div>
+
+                    <!-- Filter Lokasi -->
+                    <div>
+                        <select id="filter-location" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-corporate-500 focus:bg-white transition-all">
+                            <option value="all">Semua Penempatan</option>
+                            <option value="Kantor & Pabrik Karawang">Kantor & Pabrik Karawang</option>
+                            <option value="Area Produksi Karawang">Area Produksi Karawang</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grid Kartu Lowongan Pekerjaan -->
+            <div id="jobs-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Kartu lowongan akan dirender melalui JavaScript -->
+            </div>
+
+            <!-- State Kosong Jika Filter Tidak Menemukan Hasil -->
+            <div id="jobs-empty" class="hidden text-center py-16 bg-white rounded-2xl border border-slate-200">
+                <div class="w-16 h-16 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center mx-auto mb-4 text-2xl">
+                    <i class="fa-solid fa-folder-open"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900">Tidak ada lowongan yang sesuai</h3>
+                <p class="text-slate-500 text-sm mt-1 mb-5">Coba ubah kata kunci pencarian atau atur ulang filter kategori dan lokasi.</p>
+                <button id="reset-filters-btn" class="px-5 py-2.5 rounded-xl bg-corporate-600 hover:bg-corporate-700 text-white text-sm font-semibold transition-colors">
+                    Reset Filter
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- BAGIAN 2: SCREENING DATA KANDIDAT                                     -->
+    <!-- ===================================================================== -->
+    <section id="screening" class="py-16 sm:py-24 bg-slate-100/80 border-y border-slate-200 scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Header Section -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-corporate-600 font-bold text-sm uppercase tracking-wider">Sistem Verifikasi Otomatis</span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-slate-900 mt-1">Screening Data Kandidat</h2>
+                <p class="text-slate-600 mt-3">
+                    Lengkapi formulir di bawah ini untuk memproses lamaran dan menjalankan simulasi evaluasi kelayakan awal (ATS Pre-Screening) secara real-time.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Kolom Kiri: Formulir Screening Interaktif (7 Kolom) -->
+                <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm">
+                    <div class="flex items-center justify-between pb-5 mb-6 border-b border-slate-100">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-corporate-50 text-corporate-600 flex items-center justify-center">
+                                <i class="fa-solid fa-file-signature text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-lg text-slate-900">Formulir Data Pelamar</h3>
+                                <p class="text-xs text-slate-500">Semua kolom bertanda (*) wajib diisi dengan benar</p>
+                            </div>
+                        </div>
+                        <span class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-semibold">
+                            <i class="fa-solid fa-shield-halved"></i> Terenkripsi
+                        </span>
+                    </div>
+
+                    <form id="screening-form" class="space-y-5">
+                        <!-- Nama Lengkap & Email -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="cand-name" class="block text-sm font-semibold text-slate-700 mb-1.5">Nama Lengkap *</label>
+                                <input type="text" id="cand-name" required placeholder="Contoh: Hendra Wijaya"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-corporate-500 focus:bg-white transition-all">
+                            </div>
+                            <div>
+                                <label for="cand-email" class="block text-sm font-semibold text-slate-700 mb-1.5">Alamat Email *</label>
+                                <input type="email" id="cand-email" required placeholder="hendra.wijaya@email.com"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-corporate-500 focus:bg-white transition-all">
+                            </div>
+                        </div>
+
+                        <!-- No Telepon & Posisi yang Dilamar -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="cand-phone" class="block text-sm font-semibold text-slate-700 mb-1.5">Nomor WhatsApp *</label>
+                                <input type="tel" id="cand-phone" required placeholder="0812-3456-7890"
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-corporate-500 focus:bg-white transition-all">
+                            </div>
+                            <div>
+                                <label for="cand-position" class="block text-sm font-semibold text-slate-700 mb-1.5">Posisi yang Dilamar *</label>
+                                <select id="cand-position" required
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-corporate-500 focus:bg-white transition-all">
+                                    <option value="">-- Pilih Posisi --</option>
+                                    <option value="Staff Administrasi (Admin)">Staff Administrasi (Admin)</option>
+                                    <option value="Quality Control (QC) Inspector">Quality Control (QC) Inspector</option>
+                                    <option value="Operator Produksi">Operator Produksi</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Pendidikan Terakhir & Pengalaman Kerja -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="cand-edu" class="block text-sm font-semibold text-slate-700 mb-1.5">Pendidikan Terakhir *</label>
+                                <select id="cand-edu" required
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-corporate-500 focus:bg-white transition-all">
+                                    <option value="SMA/SMK">SMA / SMK Sederajat</option>
+                                    <option value="D3">Diploma (D3)</option>
+                                    <option value="S1" selected>Sarjana (S1)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="cand-exp" class="block text-sm font-semibold text-slate-700 mb-1.5">Pengalaman Kerja *</label>
+                                <select id="cand-exp" required
+                                    class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-corporate-500 focus:bg-white transition-all">
+                                    <option value="0">Fresh Graduate (< 1 Tahun)</option>
+                                    <option value="1">1 - 2 Tahun</option>
+                                    <option value="3" selected>3 - 5 Tahun</option>
+                                    <option value="6">> 5 Tahun</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Keahlian / Keterampilan Utama (Checkbox Interaktif) -->
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-2">Keahlian / Keterampilan Utama (Pilih yang dikuasai) *</label>
+                            <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 cursor-pointer hover:bg-corporate-50/60 transition-colors">
+                                    <input type="checkbox" name="cand-skill-cb" value="Ms. Excel & Word" class="rounded text-corporate-600 focus:ring-corporate-500">
+                                    <span>Ms. Excel & Word</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 cursor-pointer hover:bg-corporate-50/60 transition-colors">
+                                    <input type="checkbox" name="cand-skill-cb" value="Administrasi & Arsip" class="rounded text-corporate-600 focus:ring-corporate-500">
+                                    <span>Administrasi & Arsip</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 cursor-pointer hover:bg-corporate-50/60 transition-colors">
+                                    <input type="checkbox" name="cand-skill-cb" value="Alat Ukur & Inspeksi QC" class="rounded text-corporate-600 focus:ring-corporate-500">
+                                    <span>Alat Ukur & QC</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 cursor-pointer hover:bg-corporate-50/60 transition-colors">
+                                    <input type="checkbox" name="cand-skill-cb" value="Standar ISO & SOP" class="rounded text-corporate-600 focus:ring-corporate-500">
+                                    <span>Standar ISO & SOP</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 cursor-pointer hover:bg-corporate-50/60 transition-colors">
+                                    <input type="checkbox" name="cand-skill-cb" value="Pengoperasian Mesin" class="rounded text-corporate-600 focus:ring-corporate-500">
+                                    <span>Operasional Mesin</span>
+                                </label>
+                                <label class="flex items-center gap-2 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs font-medium text-slate-700 cursor-pointer hover:bg-corporate-50/60 transition-colors">
+                                    <input type="checkbox" name="cand-skill-cb" value="K3 & Sistem Shift" class="rounded text-corporate-600 focus:ring-corporate-500">
+                                    <span>K3 & Sistem Shift</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Ringkasan Profil / Catatan Singkat -->
+                        <div>
+                            <label for="cand-summary" class="block text-sm font-semibold text-slate-700 mb-1.5">Ringkasan Profil / Catatan Singkat *</label>
+                            <textarea id="cand-summary" rows="2" required placeholder="Ceritakan singkat pengalaman kerja, sertifikasi, atau kesiapan penempatan Anda..."
+                                class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-corporate-500 focus:bg-white transition-all resize-none"></textarea>
+                        </div>
+
+                        <!-- Unggah CV / Berkas Lamaran (Opsional / Pendukung) -->
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-700 mb-1.5">Unggah CV / Riwayat Hidup (PDF/DOCX)</label>
+                            <label for="cand-cv" class="flex flex-col items-center justify-center w-full p-4 border-2 border-dashed border-slate-300 rounded-2xl bg-slate-50 hover:bg-corporate-50/50 hover:border-corporate-400 cursor-pointer transition-all">
+                                <div class="flex items-center gap-3 text-slate-600">
+                                    <i class="fa-solid fa-cloud-arrow-up text-xl text-corporate-600"></i>
+                                    <div class="text-left">
+                                        <p id="cv-file-name" class="text-sm font-semibold text-slate-800">Klik untuk memilih berkas CV Anda</p>
+                                        <p class="text-xs text-slate-500">Format PDF, DOC, atau DOCX (Maks. 5 MB)</p>
+                                    </div>
+                                </div>
+                                <input id="cand-cv" type="file" accept=".pdf,.doc,.docx" class="hidden">
+                            </label>
+                        </div>
+
+                        <!-- Tombol Submit -->
+                        <div class="pt-2">
+                            <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-corporate-600 hover:bg-corporate-700 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-robot"></i>
+                                <span>Proses & Verifikasi Screening Data</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Kolom Kanan: Hasil Simulasi Screening & Daftar Kandidat (5 Kolom) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- Kartu Hasil Analisis ATS Otomatis -->
+                    <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="font-bold text-slate-900 flex items-center gap-2">
+                                <i class="fa-solid fa-chart-pie text-corporate-600"></i>
+                                Status Kelayakan Otomatis
+                            </h3>
+                            <span id="screening-badge" class="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 text-slate-600">
+                                Menunggu Input
+                            </span>
+                        </div>
+
+                        <div id="screening-result-box" class="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 text-center">
+                            <div class="w-12 h-12 rounded-full bg-corporate-100 text-corporate-600 flex items-center justify-center mx-auto mb-3">
+                                <i class="fa-solid fa-magnifying-glass-chart text-xl"></i>
+                            </div>
+                            <p class="text-sm font-semibold text-slate-800">Belum Ada Data Diproses</p>
+                            <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+                                Isi formulir di samping dan klik tombol verifikasi untuk melihat skor kecocokan kualifikasi kandidat secara instan.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Tabel / Daftar Ringkasan Kandidat Terdaftar -->
+                    <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm">
+                        <div class="flex items-center justify-between mb-4">
+                            <div>
+                                <h3 class="font-bold text-slate-900">Data Kandidat Terdaftar (Live Preview)</h3>
+                                <p class="text-xs text-slate-500">Data pelamar yang telah diverifikasi sistem ATS</p>
+                            </div>
+                            <span id="candidate-total-badge" class="px-2.5 py-1 rounded-lg bg-corporate-50 text-corporate-700 text-xs font-bold">
+                                3 Kandidat
+                            </span>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left border-collapse">
+                                <thead>
+                                    <tr class="border-b border-slate-200 text-[11px] font-bold uppercase text-slate-400">
+                                        <th class="py-2.5 pr-2">Kandidat</th>
+                                        <th class="py-2.5 px-2">Skor</th>
+                                        <th class="py-2.5 pl-2 text-right">Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="candidate-table-body" class="divide-y divide-slate-100 text-sm">
+                                    <!-- Baris data kandidat dirender lewat JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===================================================================== -->
+    <!-- BAGIAN 3: KONTAK KAMI                                                 -->
+    <!-- ===================================================================== -->
+    <section id="kontak" class="py-16 sm:py-24 bg-white scroll-mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <span class="text-corporate-600 font-bold text-sm uppercase tracking-wider">Hubungi Tim HR</span>
+                <h2 class="text-2xl sm:text-4xl font-bold text-slate-900 mt-1">Kontak Kami</h2>
+                <p class="text-slate-600 mt-3">
+                    Memiliki pertanyaan seputar proses rekrutmen, status lamaran, atau kerja sama kemitraan? Tim kami siap membantu Anda.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                <!-- Informasi Kantor (5 Kolom) -->
+                <div class="lg:col-span-5 bg-gradient-to-br from-slate-900 to-corporate-900 text-white p-7 sm:p-9 rounded-3xl shadow-lg flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-xl font-bold mb-2">PT CIPTA BUANA SEJAHTERA</h3>
+                        <p class="text-slate-300 text-sm mb-8 leading-relaxed">
+                            Kantor Pusat & Kawasan Operasional Pabrik. Hubungi saluran resmi HRD kami di bawah ini untuk informasi rekrutmen.
+                        </p>
+
+                        <div class="space-y-6">
+                            <!-- Alamat -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 text-blue-300">
+                                    <i class="fa-solid fa-location-dot text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-sm text-white">Alamat Kantor & Pabrik</h4>
+                                    <p class="text-sm text-slate-300 mt-1 leading-relaxed">
+                                        Ds Mekarmulya Kec Teluk Jambe Barat Kab Karawang 41361
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 text-blue-300">
+                                    <i class="fa-solid fa-envelope text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-sm text-white">Email Resmi HRD</h4>
+                                    <p class="text-sm text-slate-300 mt-1">hrd@ciptabuanasejahtera.co.id</p>
+                                    <p class="text-xs text-slate-400">rekrutmen@ciptabuanasejahtera.co.id</p>
+                                </div>
+                            </div>
+
+                            <!-- Telepon -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 text-blue-300">
+                                    <i class="fa-solid fa-phone text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-sm text-white">Telepon & WhatsApp HRD</h4>
+                                    <p class="text-sm text-slate-300 mt-1">0812-8607-4239</p>
+                                    <p class="text-xs text-slate-400">Layanan Telepon & WhatsApp Resmi Pelamar</p>
+                                </div>
+                            </div>
+
+                            <!-- Jam Operasional -->
+                            <div class="flex items-start gap-4">
+                                <div class="w-11 h-11 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 text-blue-300">
+                                    <i class="fa-solid fa-clock text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-sm text-white">Jam Operasional Rekrutmen</h4>
+                                    <p class="text-sm text-slate-300 mt-1">Senin – Jumat: 08.00 – 17.00 WIB</p>
+                                    <p class="text-xs text-slate-400">Sabtu, Minggu & Hari Libur Nasional: Tutup</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Media Sosial -->
+                    <div class="pt-8 mt-8 border-t border-white/15 flex items-center justify-between">
+                        <span class="text-xs text-slate-300 font-medium">Ikuti Karier Kami:</span>
+                        <div class="flex items-center gap-3">
+                            <a href="#kontak" aria-label="LinkedIn" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-corporate-500 flex items-center justify-center transition-colors">
+                                <i class="fa-brands fa-linkedin-in text-sm"></i>
+                            </a>
+                            <a href="#kontak" aria-label="Instagram" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-corporate-500 flex items-center justify-center transition-colors">
+                                <i class="fa-brands fa-instagram text-sm"></i>
+                            </a>
+                            <a href="#kontak" aria-label="Website" class="w-9 h-9 rounded-xl bg-white/10 hover:bg-corporate-500 flex items-center justify-center transition-colors">
+                                <i class="fa-solid fa-globe text-sm"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Formulir Pesan Interaktif (7 Kolom) -->
+                <div class="lg:col-span-7 bg-slate-50 p-7 sm:p-9 rounded-3xl border border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Kirim Pesan atau Pertanyaan</h3>
+                    <p class="text-sm text-slate-600 mb-6">
+                        Isi formulir di bawah ini, dan spesialis HR kami akan membalas ke email Anda maksimal dalam 1x24 jam hari kerja.
+                    </p>
+
+                    <form id="contact-form" class="space-y-5">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                            <div>
+                                <label for="contact-name" class="block text-sm font-semibold text-slate-700 mb-1.5">Nama Anda *</label>
+                                <input type="text" id="contact-name" required placeholder="Masukkan nama lengkap"
+                                    class="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-corporate-500 transition-all">
+                            </div>
+                            <div>
+                                <label for="contact-email" class="block text-sm font-semibold text-slate-700 mb-1.5">Email Aktif *</label>
+                                <input type="email" id="contact-email" required placeholder="nama@domain.com"
+                                    class="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-corporate-500 transition-all">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="contact-subject" class="block text-sm font-semibold text-slate-700 mb-1.5">Topik Pertanyaan *</label>
+                            <select id="contact-subject" required
+                                class="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-corporate-500 transition-all">
+                                <option value="Informasi Lowongan Kerja">Informasi Lowongan Kerja</option>
+                                <option value="Status Screening & Wawancara">Status Screening & Wawancara</option>
+                                <option value="Kendala Teknis Unggah Dokumen">Kendala Teknis Unggah Dokumen</option>
+                                <option value="Program Magang / Campus Hiring">Program Magang / Campus Hiring</option>
+                                <option value="Lainnya">Pertanyaan Umum Lainnya</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="contact-message" class="block text-sm font-semibold text-slate-700 mb-1.5">Isi Pesan *</label>
+                            <textarea id="contact-message" rows="4" required placeholder="Tuliskan pertanyaan atau detail pesan Anda secara jelas..."
+                                class="w-full px-4 py-3 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-corporate-500 transition-all resize-none"></textarea>
+                        </div>
+
+                        <button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-slate-900 hover:bg-corporate-700 text-white font-semibold text-sm shadow-sm transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>Kirim Pesan Sekarang</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Sederhana & Profesional -->
+    <footer class="bg-slate-900 text-slate-400 py-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
+            <div class="text-center md:text-left">
+                <div class="flex flex-col sm:flex-row items-center gap-1 sm:gap-2">
+                    <span class="font-bold text-white">PT CIPTA BUANA SEJAHTERA</span>
+                    <span>&copy; 2026 All rights reserved.</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-1">Ds Mekarmulya Kec Teluk Jambe Barat Kab Karawang 41361 • Telp/WA: 0812-8607-4239</p>
+            </div>
+            <div class="flex items-center gap-6 text-xs">
+                <a href="#lowongan" class="hover:text-white transition-colors">Lowongan Pekerjaan</a>
+                <a href="#screening" class="hover:text-white transition-colors">Screening Data</a>
+                <a href="#kontak" class="hover:text-white transition-colors">Kontak Kami</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal Detail Persyaratan Lowongan -->
+    <div id="job-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 transform transition-all">
+            <div class="flex items-start justify-between gap-4 pb-4 border-b border-slate-100">
+                <div>
+                    <span id="modal-category" class="px-3 py-1 rounded-full text-xs font-bold bg-corporate-50 text-corporate-700">Kategori</span>
+                    <h3 id="modal-title" class="text-xl font-bold text-slate-900 mt-2">Judul Posisi</h3>
+                    <p id="modal-meta" class="text-xs text-slate-500 mt-1">Lokasi • Tipe Kerja • Gaji</p>
+                </div>
+                <button id="close-modal-btn" class="w-9 h-9 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <div class="py-5 space-y-4 max-h-[60vh] overflow-y-auto">
+                <div>
+                    <h4 class="text-sm font-bold text-slate-900 mb-1.5">Deskripsi Pekerjaan</h4>
+                    <p id="modal-desc" class="text-sm text-slate-600 leading-relaxed"></p>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-slate-900 mb-2">Persyaratan & Kualifikasi</h4>
+                    <ul id="modal-reqs" class="space-y-2 text-sm text-slate-600"></ul>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex flex-col sm:flex-row gap-3 justify-end">
+                <button id="modal-cancel-btn" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-700 text-sm font-semibold hover:bg-slate-50 transition-colors">
+                    Tutup
+                </button>
+                <button id="modal-apply-btn" class="px-6 py-2.5 rounded-xl bg-corporate-600 hover:bg-corporate-700 text-white text-sm font-semibold shadow-sm transition-colors flex items-center justify-center gap-2">
+                    <span>Lamar Posisi Ini</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Interaktif -->
+    <script>
+        // =========================================================================
+        // 1. DATA LOWONGAN PEKERJAAN (PT CIPTA BUANA SEJAHTERA)
+        // =========================================================================
+        const jobsData = [
+            {
+                id: 1,
+                title: "Staff Administrasi (Admin)",
+                category: "Administrasi & Umum",
+                location: "Kantor & Pabrik Karawang",
+                type: "Full-Time • Office / Pabrik",
+                salary: "Rp 5.5jt - 7.5jt",
+                description: "Mengelola pengarsipan dokumen operasional, melakukan input data harian secara akurat, menyusun laporan administrasi berkala, serta mendukung kelancaran komunikasi antar departemen.",
+                requirements: [
+                    "Pendidikan minimal D3 / S1 jurusan Administrasi Perkantoran, Akuntansi, atau Manajemen.",
+                    "Mahir mengoperasikan Microsoft Office (terutama Ms. Excel: VLOOKUP, Pivot Table & Ms. Word).",
+                    "Teliti, rapi dalam pengarsipan dokumen fisik maupun digital, serta memiliki komunikasi yang baik.",
+                    "Bersedia ditempatkan di kantor & area operasional pabrik Telukjambe Barat, Karawang."
+                ],
+                requiredSkills: ["Ms. Excel & Word", "Administrasi & Arsip"],
+                keywords: ["admin", "administrasi", "excel", "word", "arsip", "input data", "kantor", "akuntansi", "karawang"]
+            },
+            {
+                id: 2,
+                title: "Quality Control (QC) Inspector",
+                category: "Quality Assurance / QC",
+                location: "Area Produksi Karawang",
+                type: "Full-Time • Sistem Shift",
+                salary: "Rp 6jt - 8.5jt",
+                description: "Melakukan inspeksi dan pengujian mutu terhadap bahan baku datang (incoming), proses produksi (in-process), hingga produk jadi (outgoing) agar sesuai dengan standar kualitas perusahaan.",
+                requirements: [
+                    "Pendidikan minimal SMA/SMK Teknik/Kimia/Analis atau D3 Teknik Industri/Kimia.",
+                    "Memahami penggunaan alat ukur presisi (kaliper, mikrometer) serta standar mutu (ISO 9001 & SOP).",
+                    "Sangat teliti, tegas terhadap ketidaksesuaian produk (NG), dan mampu membuat laporan QC harian.",
+                    "Bersedia bekerja dengan sistem shift di area Pabrik Telukjambe Barat, Karawang."
+                ],
+                requiredSkills: ["Alat Ukur & Inspeksi QC", "Standar ISO & SOP"],
+                keywords: ["qc", "quality control", "inspeksi", "alat ukur", "iso", "sop", "mutu", "pabrik", "karawang"]
+            },
+            {
+                id: 3,
+                title: "Operator Produksi",
+                category: "Produksi & Operasional",
+                location: "Area Produksi Karawang",
+                type: "Full-Time • Sistem Shift",
+                salary: "Rp 5.3jt - 7.2jt",
+                description: "Mengoperasikan mesin produksi sesuai instruksi kerja (SOP), memastikan target output harian tercapai dengan kualitas terjaga, serta mematuhi standar keselamatan kerja di lantai produksi.",
+                requirements: [
+                    "Pendidikan minimal SMA / SMK sederajat (diutamakan jurusan Teknik Mesin, Elektro, atau Otomotif).",
+                    "Siap bekerja dengan sistem shift (Shift 1, 2, dan 3) serta mampu bekerja sama dalam tim.",
+                    "Memahami dan menerapkan prosedur K3 (Keselamatan dan Kesehatan Kerja) di area pabrik.",
+                    "Disiplin, cekatan, sehat jasmani, dan teliti dalam mengoperasikan mesin produksi di Karawang."
+                ],
+                requiredSkills: ["Pengoperasian Mesin", "K3 & Sistem Shift"],
+                keywords: ["operator", "produksi", "mesin", "shift", "k3", "pabrik", "manufaktur", "smk", "karawang"]
+            }
+        ];
+
+        // Data Awal Riwayat Kandidat Screening (Dummy Awal Relevan)
+        let screenedCandidates = [
+            { name: "Siti Nurhaliza", position: "Staff Administrasi (Admin)", score: 92, status: "Lolos Tahap Awal" },
+            { name: "Ahmad Fauzi", position: "Quality Control (QC) Inspector", score: 88, status: "Lolos Tahap Awal" },
+            { name: "Rian Saputra", position: "Operator Produksi", score: 85, status: "Lolos Tahap Awal" }
+        ];
+
+        // =========================================================================
+        // 2. FUNGSI NOTIFIKASI TOAST (PENGGANTI ALERT)
+        // =========================================================================
+        function showToast(title, message, type = "success") {
+            const container = document.getElementById("toast-container");
+            const toast = document.createElement("div");
+            
+            const colors = type === "success" 
+                ? "bg-slate-900 border-emerald-500 text-white" 
+                : "bg-slate-900 border-corporate-500 text-white";
+            const icon = type === "success" 
+                ? '<i class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>' 
+                : '<i class="fa-solid fa-circle-info text-blue-400 text-lg"></i>';
+
+            toast.className = `pointer-events-auto max-w-sm w-full p-4 rounded-2xl border-l-4 shadow-xl flex items-start gap-3 transform transition-all duration-300 translate-y-4 opacity-0 ${colors}`;
+            toast.innerHTML = `
+                <div class="mt-0.5">${icon}</div>
+                <div class="flex-1">
+                    <h4 class="text-sm font-bold">${title}</h4>
+                    <p class="text-xs text-slate-300 mt-0.5 leading-relaxed">${message}</p>
+                </div>
+            `;
+
+            container.appendChild(toast);
+            requestAnimationFrame(() => {
+                toast.classList.remove("translate-y-4", "opacity-0");
+            });
+
+            setTimeout(() => {
+                toast.classList.add("translate-y-4", "opacity-0");
+                setTimeout(() => toast.remove(), 300);
+            }, 4500);
+        }
+
+        // =========================================================================
+        // 3. RENDER LOWONGAN PEKERJAAN & FILTER
+        // =========================================================================
+        const jobsGrid = document.getElementById("jobs-grid");
+        const jobsEmpty = document.getElementById("jobs-empty");
+        const jobCountEl = document.getElementById("job-count");
+        const filterSearch = document.getElementById("filter-search");
+        const filterCategory = document.getElementById("filter-category");
+        const filterLocation = document.getElementById("filter-location");
+
+        function renderJobs() {
+            const searchVal = filterSearch.value.toLowerCase().trim();
+            const catVal = filterCategory.value;
+            const locVal = filterLocation.value;
+
+            const filtered = jobsData.filter(job => {
+                const matchSearch = job.title.toLowerCase().includes(searchVal) || 
+                                    job.description.toLowerCase().includes(searchVal) ||
+                                    job.keywords.some(k => k.includes(searchVal));
+                const matchCat = catVal === "all" || job.category === catVal;
+                const matchLoc = locVal === "all" || job.location === locVal;
+                return matchSearch && matchCat && matchLoc;
+            });
+
+            jobCountEl.textContent = filtered.length;
+            jobsGrid.innerHTML = "";
+
+            if (filtered.length === 0) {
+                jobsGrid.classList.add("hidden");
+                jobsEmpty.classList.remove("hidden");
+                return;
+            }
+
+            jobsGrid.classList.remove("hidden");
+            jobsEmpty.classList.add("hidden");
+
+            filtered.forEach(job => {
+                const card = document.createElement("div");
+                card.className = "bg-white rounded-3xl p-6 border border-slate-200 shadow-sm hover:shadow-md hover:border-corporate-300 transition-all flex flex-col justify-between group";
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-corporate-50 text-corporate-700">
+                                ${job.category}
+                            </span>
+                            <span class="text-xs font-semibold text-slate-500 flex items-center gap-1">
+                                <i class="fa-solid fa-location-dot text-corporate-500"></i> ${job.location}
+                            </span>
+                        </div>
+
+                        <h3 class="text-lg font-bold text-slate-900 group-hover:text-corporate-600 transition-colors">
+                            ${job.title}
+                        </h3>
+                        <p class="text-xs font-medium text-slate-500 mt-1 mb-3">${job.type} • <span class="text-slate-700 font-semibold">${job.salary}</span></p>
+                        
+                        <p class="text-sm text-slate-600 line-clamp-3 leading-relaxed mb-4">
+                            ${job.description}
+                        </p>
+
+                        <div class="bg-slate-50 rounded-2xl p-3.5 mb-5 border border-slate-100">
+                            <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">Persyaratan Utama:</p>
+                            <ul class="text-xs text-slate-600 space-y-1">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                                    <span class="line-clamp-1">${job.requirements[0]}</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-emerald-500 mt-0.5"></i>
+                                    <span class="line-clamp-1">${job.requirements[1]}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-2.5 pt-2">
+                        <button type="button" onclick="openJobModal(${job.id})" class="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-colors">
+                            Detail Posisi
+                        </button>
+                        <button type="button" onclick="applyToJob('${job.title}')" class="flex-1 py-2.5 px-4 rounded-xl bg-corporate-600 hover:bg-corporate-700 text-white text-xs font-bold shadow-sm transition-all flex items-center justify-center gap-1.5">
+                            <span>Lamar Posisi Ini</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                `;
+                jobsGrid.appendChild(card);
+            });
+        }
+
+        filterSearch.addEventListener("input", renderJobs);
+        filterCategory.addEventListener("change", renderJobs);
+        filterLocation.addEventListener("change", renderJobs);
+
+        document.getElementById("reset-filters-btn").addEventListener("click", () => {
+            filterSearch.value = "";
+            filterCategory.value = "all";
+            filterLocation.value = "all";
+            renderJobs();
+        });
+
+        // =========================================================================
+        // 4. MODAL DETAIL LOWONGAN & AKSI LAMAR LANGSUNG
+        // =========================================================================
+        const jobModal = document.getElementById("job-modal");
+        let selectedModalJobTitle = "";
+
+        function openJobModal(jobId) {
+            const job = jobsData.find(j => j.id === jobId);
+            if (!job) return;
+
+            selectedModalJobTitle = job.title;
+            document.getElementById("modal-category").textContent = job.category;
+            document.getElementById("modal-title").textContent = job.title;
+            document.getElementById("modal-meta").textContent = `${job.location} • ${job.type} • Estimasi Gaji: ${job.salary}`;
+            document.getElementById("modal-desc").textContent = job.description;
+
+            const reqList = document.getElementById("modal-reqs");
+            reqList.innerHTML = job.requirements.map(req => `
+                <li class="flex items-start gap-2.5">
+                    <i class="fa-solid fa-circle-check text-corporate-600 mt-1 text-xs"></i>
+                    <span>${req}</span>
+                </li>
+            `).join("");
+
+            jobModal.classList.remove("hidden");
+            jobModal.classList.add("flex");
+        }
+
+        function closeJobModal() {
+            jobModal.classList.add("hidden");
+            jobModal.classList.remove("flex");
+        }
+
+        document.getElementById("close-modal-btn").addEventListener("click", closeJobModal);
+        document.getElementById("modal-cancel-btn").addEventListener("click", closeJobModal);
+        jobModal.addEventListener("click", (e) => {
+            if (e.target === jobModal) closeJobModal();
+        });
+
+        document.getElementById("modal-apply-btn").addEventListener("click", () => {
+            closeJobModal();
+            applyToJob(selectedModalJobTitle);
+        });
+
+        // Mengarahkan ke bagian Screening Data dan mengisi posisi otomatis
+        function applyToJob(positionTitle) {
+            const posSelect = document.getElementById("cand-position");
+            posSelect.value = positionTitle;
+
+            const screeningSection = document.getElementById("screening");
+            screeningSection.scrollIntoView({ behavior: "smooth" });
+
+            setTimeout(() => {
+                document.getElementById("cand-name").focus();
+            }, 600);
+
+            showToast("Posisi Dipilih", `Formulir screening telah disesuaikan untuk posisi ${positionTitle}.`, "info");
+        }
+
+        // =========================================================================
+        // 5. FORMULIR SCREENING DATA & SIMULASI PENGECEKAN KELAYAKAN
+        // =========================================================================
+        const cvInput = document.getElementById("cand-cv");
+        const cvFileName = document.getElementById("cv-file-name");
+
+        cvInput.addEventListener("change", (e) => {
+            if (e.target.files && e.target.files.length > 0) {
+                cvFileName.textContent = `Berkas terpilih: ${e.target.files[0].name}`;
+                cvFileName.classList.add("text-corporate-700");
+            }
+        });
+
+        function renderCandidateTable() {
+            const tbody = document.getElementById("candidate-table-body");
+            const badgeCount = document.getElementById("candidate-total-badge");
+            badgeCount.textContent = `${screenedCandidates.length} Kandidat`;
+
+            tbody.innerHTML = screenedCandidates.slice(0, 5).map(cand => {
+                const isPassed = cand.score >= 80;
+                const badgeClass = isPassed 
+                    ? "bg-emerald-50 text-emerald-700 border-emerald-200" 
+                    : "bg-amber-50 text-amber-700 border-amber-200";
+
+                return `
+                    <tr class="hover:bg-slate-50/80 transition-colors">
+                        <td class="py-3 pr-2">
+                            <p class="font-semibold text-slate-800 text-xs">${cand.name}</p>
+                            <p class="text-[11px] text-slate-500 truncate max-w-[140px]">${cand.position}</p>
+                        </td>
+                        <td class="py-3 px-2 font-bold text-xs text-slate-700">${cand.score}%</td>
+                        <td class="py-3 pl-2 text-right">
+                            <span class="inline-block px-2 py-0.5 rounded-md border text-[10px] font-bold ${badgeClass}">
+                                ${cand.status}
+                            </span>
+                        </td>
+                    </tr>
+                `;
+            }).join("");
+        }
+
+        document.getElementById("screening-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById("cand-name").value.trim();
+            const position = document.getElementById("cand-position").value;
+            const edu = document.getElementById("cand-edu").value;
+            const exp = parseInt(document.getElementById("cand-exp").value, 10);
+            const selectedSkills = Array.from(document.querySelectorAll('input[name="cand-skill-cb"]:checked')).map(cb => cb.value);
+
+            if (selectedSkills.length === 0) {
+                showToast("Pilih Keterampilan", "Silakan centang minimal satu keahlian utama Anda.", "info");
+                return;
+            }
+
+            // Kalkulasi Simulasi Skor Kelayakan (ATS Scoring Logic)
+            let score = 55; // Skor dasar kelengkapan data pelamar
+
+            // Bobot Pendidikan sesuai standar posisi
+            if (position === "Staff Administrasi (Admin)") {
+                score += (edu === "S1" || edu === "D3") ? 15 : 6;
+            } else {
+                score += (edu === "S1" || edu === "D3") ? 15 : 12; // SMA/SMK sangat relevan untuk QC & Operator
+            }
+
+            // Bobot Pengalaman Kerja
+            if (exp >= 3) score += 15;
+            else if (exp >= 1) score += 10;
+            else score += 5;
+
+            // Pencocokan keterampilan yang dicentang dengan syarat posisi
+            const targetJob = jobsData.find(j => j.title === position);
+            let matchedSkillsCount = 0;
+            if (targetJob && targetJob.requiredSkills) {
+                targetJob.requiredSkills.forEach(reqSkill => {
+                    if (selectedSkills.includes(reqSkill)) matchedSkillsCount++;
+                });
+                score += matchedSkillsCount * 7;
+            }
+            // Bonus keterampilan tambahan yang relevan
+            score += Math.min(6, Math.max(0, selectedSkills.length - matchedSkillsCount) * 2);
+
+            score = Math.min(98, score);
+            const isQualified = score >= 80;
+            const statusText = isQualified ? "Lolos Tahap Awal" : "Review HRD";
+
+            // Perbarui UI Kartu Hasil Analisis ATS
+            const badge = document.getElementById("screening-badge");
+            const resultBox = document.getElementById("screening-result-box");
+
+            badge.textContent = isQualified ? "Lolos Tahap Awal" : "Review HRD";
+            badge.className = isQualified 
+                ? "px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800"
+                : "px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-800";
+
+            resultBox.className = isQualified
+                ? "p-5 rounded-2xl bg-emerald-50/70 border border-emerald-200 text-left transition-all"
+                : "p-5 rounded-2xl bg-amber-50/70 border border-amber-200 text-left transition-all";
+
+            resultBox.innerHTML = `
+                <div class="flex items-center justify-between mb-3">
+                    <div>
+                        <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Kandidat PT Cipta Buana Sejahtera</p>
+                        <h4 class="text-base font-bold text-slate-900">${name}</h4>
+                    </div>
+                    <div class="text-right">
+                        <span class="text-2xl font-extrabold ${isQualified ? 'text-emerald-600' : 'text-amber-600'}">${score}%</span>
+                        <p class="text-[10px] font-semibold text-slate-500">Skor Kecocokan</p>
+                    </div>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-2 mb-3 overflow-hidden">
+                    <div class="h-2 rounded-full ${isQualified ? 'bg-emerald-500' : 'bg-amber-500'}" style="width: ${score}%"></div>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                    ${isQualified 
+                        ? `Selamat! Kualifikasi Anda untuk posisi <strong>${position}</strong> memenuhi standar seleksi awal kami. Tim HRD PT Cipta Buana Sejahtera akan menghubungi WhatsApp/Email Anda untuk jadwal tes & wawancara.` 
+                        : `Data lamaran untuk posisi <strong>${position}</strong> telah tersimpan. Tim rekrutmen PT Cipta Buana Sejahtera akan meninjau profil Anda lebih lanjut.`}
+                </p>
+            `;
+
+            // Tambahkan ke daftar riwayat kandidat teratas
+            screenedCandidates.unshift({
+                name: name,
+                position: position,
+                score: score,
+                status: statusText
+            });
+            renderCandidateTable();
+
+            showToast("Screening Berhasil!", `Data ${name} telah diproses dengan skor kecocokan ${score}%.`, "success");
+            e.target.reset();
+            cvFileName.textContent = "Klik untuk memilih berkas CV Anda";
+            cvFileName.classList.remove("text-corporate-700");
+        });
+
+        // =========================================================================
+        // 6. FORMULIR KONTAK KAMI
+        // =========================================================================
+        document.getElementById("contact-form").addEventListener("submit", (e) => {
+            e.preventDefault();
+            const senderName = document.getElementById("contact-name").value.trim();
+            const subject = document.getElementById("contact-subject").value;
+
+            showToast(
+                "Pesan Terkirim ke Tim HR",
+                `Terima kasih ${senderName}. Pertanyaan mengenai "${subject}" telah kami terima dan akan segera dibalas.`,
+                "success"
+            );
+            e.target.reset();
+        });
+
+        // =========================================================================
+        // 7. NAVIGASI MOBILE & HIGHLIGHT MENU AKTIF SAAT SCROLL
+        // =========================================================================
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const mobileMenuIcon = document.getElementById("mobile-menu-icon");
+
+        mobileMenuBtn.addEventListener("click", () => {
+            const isHidden = mobileMenu.classList.toggle("hidden");
+            mobileMenuIcon.className = isHidden ? "fa-solid fa-bars text-xl" : "fa-solid fa-xmark text-xl";
+        });
+
+        document.querySelectorAll(".mobile-nav-link").forEach(link => {
+            link.addEventListener("click", () => {
+                mobileMenu.classList.add("hidden");
+                mobileMenuIcon.className = "fa-solid fa-bars text-xl";
+            });
+        });
+
+        // ScrollSpy untuk menandai menu aktif secara otomatis
+        const sections = document.querySelectorAll("section[id]");
+        const navLinks = document.querySelectorAll(".nav-link");
+
+        window.addEventListener("scroll", () => {
+            let current = "lowongan";
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 140;
+                if (window.scrollY >= sectionTop) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove("text-corporate-700", "bg-white", "shadow-sm", "font-semibold");
+                link.classList.add("text-slate-600", "font-medium");
+
+                if (link.getAttribute("data-nav") === current) {
+                    link.classList.remove("text-slate-600", "font-medium");
+                    link.classList.add("text-corporate-700", "bg-white", "shadow-sm", "font-semibold");
+                }
+            });
+        });
+
+        // Inisialisasi tampilan awal saat halaman dimuat
+        renderJobs();
+        renderCandidateTable();
+    </script>
+</body>
+</html>
